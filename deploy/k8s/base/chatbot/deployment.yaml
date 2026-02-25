@@ -12,6 +12,8 @@ spec:
       labels:
         app: crapi-chatbot
     spec:
+      imagePullSecrets:
+        - name: harness-registry
       containers:
       - name: crapi-chatbot
         image: crapi/crapi-chatbot:latest

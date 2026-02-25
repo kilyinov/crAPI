@@ -19,6 +19,10 @@ spec:
         release: {{ .Release.Name }}
         {{- toYaml .Values.mongodb.podLabels | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ .Values.mongodb.name }}
           image: {{ .Values.mongodb.image }}:{{ .Values.mongodb.version }}

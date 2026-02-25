@@ -6,6 +6,8 @@ jwtSecret: crapi
 enableLog4j: true
 enableShellInjection: true
 imagePullPolicy: Always
+imagePullSecrets:
+ - name: harness-registry
 apiGatewayServiceUrl: https://api.mypremiumdealership.com
 apiGatewayServiceInstall: true
 apiGatewayPassword:
