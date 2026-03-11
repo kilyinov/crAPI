@@ -255,7 +255,7 @@ jobs:
       - name: Run workshop tests
         run: |
           cd services/workshop
-          pip3 install virtualenv
+          pip3 install setuptools virtualenv
           virtualenv venv
           source venv/bin/activate
           pip3 install -r requirements.txt
