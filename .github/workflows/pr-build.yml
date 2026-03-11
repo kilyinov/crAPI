@@ -63,10 +63,16 @@ jobs:
           echo "TAG_LATEST=latest" >> ${GITHUB_ENV}
 
       - name: Running on a branch and pull req.
-        if: steps.branch-name.outputs.is_tag != 'true' && github.event_name != 'push'
+        if: steps.branch-name.outputs.is_tag != 'true' && github.event_name == 'pull_request'
         run: |
           echo "TAG_NAME=${{ steps.branch-name.outputs.base_ref_branch }}" >> ${GITHUB_ENV}
           echo "TAG_LATEST=${{ steps.branch-name.outputs.base_ref_branch }}" >> ${GITHUB_ENV}
+
+      - name: Running on workflow_dispatch.
+        if: steps.branch-name.outputs.is_tag != 'true' && github.event_name == 'workflow_dispatch'
+        run: |
+          echo "TAG_NAME=${{ steps.branch-name.outputs.current_branch }}" >> ${GITHUB_ENV}
+          echo "TAG_LATEST=${{ steps.branch-name.outputs.current_branch }}" >> ${GITHUB_ENV}
 
       # setup Docker build action
       - name: Set up Docker Buildx
